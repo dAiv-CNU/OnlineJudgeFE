@@ -23,61 +23,61 @@ import * as Setting from '@oj/views/setting'
 export default [
   {
     name: 'home',
-    path: '/judge/',
+    path: '/',
     meta: {title: 'Home'},
     component: Home
   },
   {
     name: 'logout',
-    path: '/judge/logout',
+    path: '/logout',
     meta: {title: 'Logout'},
     component: Logout
   },
   {
     name: 'apply-reset-password',
-    path: '/judge/apply-reset-password',
+    path: '/apply-reset-password',
     meta: {title: 'Apply Reset Password'},
     component: ApplyResetPassword
   },
   {
     name: 'reset-password',
-    path: '/judge/reset-password/:token',
+    path: '/reset-password/:token',
     meta: {title: 'Reset Password'},
     component: ResetPassword
   },
   {
     name: 'problem-list',
-    path: '/judge/problem',
+    path: '/problem',
     meta: {title: 'Problem List'},
     component: ProblemList
   },
   {
     name: 'problem-details',
-    path: '/judge/problem/:problemID',
+    path: '/problem/:problemID',
     meta: {title: 'Problem Details'},
     component: Problem
   },
   {
     name: 'submission-list',
-    path: '/judge/status',
+    path: '/status',
     meta: {title: 'Submission List'},
     component: SubmissionList
   },
   {
     name: 'submission-details',
-    path: '/judge/status/:id/',
+    path: '/status/:id/',
     meta: {title: 'Submission Details'},
     component: SubmissionDetails
   },
   {
     name: 'contest-list',
-    path: '/judge/contest',
+    path: '/contest',
     meta: {title: 'Contest List'},
     component: Contest.ContestList
   },
   {
     name: 'contest-details',
-    path: '/judge/contest/:contestID/',
+    path: '/contest/:contestID/',
     component: Contest.ContestDetails,
     meta: {title: 'Contest Details'},
     children: [
@@ -115,24 +115,24 @@ export default [
   },
   {
     name: 'acm-rank',
-    path: '/judge/acm-rank',
+    path: '/acm-rank',
     meta: {title: 'ACM Rankings'},
     component: ACMRank
   },
   {
     name: 'oi-rank',
-    path: '/judge/oi-rank',
+    path: '/oi-rank',
     meta: {title: 'OI Rankings'},
     component: OIRank
   },
   {
     name: 'user-home',
-    path: '/judge/user-home',
+    path: '/user-home',
     component: UserHome,
     meta: {requiresAuth: true, title: 'User Home'}
   },
   {
-    path: '/judge/setting',
+    path: '/setting',
     component: Setting.Settings,
     children: [
       {
@@ -162,13 +162,13 @@ export default [
     ]
   },
   {
-    path: '/judge/about',
+    path: '/about',
     name: 'about',
     meta: {title: 'About'},
     component: About
   },
   {
-    path: '/judge/faq',
+    path: '/faq',
     name: 'faq',
     meta: {title: 'FAQ'},
     component: FAQ

@@ -83,13 +83,13 @@
                     color: #7d8592 !important;
                 }
             </style>
-            <link href="/cdn/bootstrap/5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
-            <link href="/dist/res/css/style.css" rel="stylesheet">
-            <link href="/dist/res/css/color.css" rel="stylesheet">
+            <link href="https://daiv-cnu.github.io/cdn/bootstrap/5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+            <link href="https://daiv-cnu.github.io/dist/res/css/style.css" rel="stylesheet">
+            <link href="https://daiv-cnu.github.io/dist/res/css/color.css" rel="stylesheet">
         `;
         const currentYear = new Date().getFullYear();
         const templatePath = "footer.html";
-        const result = await fetch("/dist/res/templates/" + templatePath);
+        const result = await fetch("https://daiv-cnu.github.io/dist/res/templates/" + templatePath);
         const templateText = await result.text();
         insertElement(templateText, shadow, -1);
 

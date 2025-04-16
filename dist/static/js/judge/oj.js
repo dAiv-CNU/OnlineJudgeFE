@@ -23632,7 +23632,7 @@ webpackJsonp([7], {
             },
             methods: s()({}, Object(l.mapActions)(["getProfile", "changeModalStatus"]), {
                 handleRoute: function (e) {
-                    e && e.indexOf("admin") < 0 ? this.$router.push(e) : window.open("/admin/")
+                    e && e.indexOf("admin") < 0 ? this.$router.push(e) : window.open("/judge/admin/")
                 }, handleBtnClick: function (e) {
                     this.changeModalStatus({visible: !0, mode: e})
                 }

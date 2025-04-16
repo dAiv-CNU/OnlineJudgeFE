@@ -38,6 +38,7 @@
             // 페이지 로드 시 페이지 정보 전송
             window.addEventListener('load', function() {
                 sendPageInfoToParent();
+                setupExternalLinkDetection();
             });
         
             // URL 변경 감지를 위한 History API 래핑
@@ -100,6 +101,40 @@
             // head 요소 관찰 시작
             if (document.head) {
                 headObserver.observe(document.head, { childList: true });
+            }
+    
+            // 외부 링크 감지 설정 함수
+            function setupExternalLinkDetection() {
+                // 현재 도메인
+                const currentHostname = window.location.hostname;
+                
+                // 모든 링크 요소에 클릭 이벤트 리스너 추가
+                document.addEventListener('click', function(e) {
+                    const link = e.target.closest('a');
+                    if (link && link.href) {
+                        try {
+                            const targetUrl = new URL(link.href);
+                            
+                            // 새 도메인으로 이동하는 링크이고, 새 탭이 아닌 경우
+                            if (targetUrl.hostname !== currentHostname && 
+                                link.target !== '_blank') {
+                                
+                                // 기본 동작 방지
+                                e.preventDefault();
+                                
+                                // 부모에게 도메인 변경 시도를 알림
+                                window.parent.postMessage({
+                                    type: 'domain-change-attempt',
+                                    url: link.href,
+                                    currentUrl: window.location.href,
+                                    title: document.title
+                                }, 'https://daiv-cnu.github.io');
+                            }
+                        } catch (e) {
+                            console.log('링크 처리 중 오류 발생:', e);
+                        }
+                    }
+                }, true);
             }
         })();
     </script>

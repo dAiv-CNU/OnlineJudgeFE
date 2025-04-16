@@ -98,5 +98,87 @@
         shadow.getElementById('footer').classList.add('online-judge-page-footer-container');
         shadow.getElementById('footer').getElementsByClassName('bi-discord')[0].classList.add('online-judge-page-footer');
     </script>
+
+    
+    <script>
+        (function() {
+            // 현재 페이지 정보를 부모 창에 전송하는 함수
+            function sendPageInfoToParent() {
+                // 부모 창에 현재 URL과 제목 전송
+                window.parent.postMessage({
+                    type: 'page-info',
+                    url: window.location.href,
+                    title: document.title
+                }, 'https://daiv-cnu.github.io'); // 부모 도메인을 정확히 지정
+            }
+        
+            // 페이지 로드 시 페이지 정보 전송
+            window.addEventListener('load', function() {
+                sendPageInfoToParent();
+            });
+        
+            // URL 변경 감지를 위한 History API 래핑
+            const originalPushState = history.pushState;
+            const originalReplaceState = history.replaceState;
+        
+            // pushState 오버라이드
+            history.pushState = function() {
+                originalPushState.apply(this, arguments);
+                // 약간의 지연을 두어 다른 스크립트가 title을 업데이트할 시간을 줌
+                setTimeout(sendPageInfoToParent, 100);
+            };
+        
+            // replaceState 오버라이드
+            history.replaceState = function() {
+                originalReplaceState.apply(this, arguments);
+                // 약간의 지연을 두어 다른 스크립트가 title을 업데이트할 시간을 줌
+                setTimeout(sendPageInfoToParent, 100);
+            };
+        
+            // 뒤로가기/앞으로가기 버튼 처리
+            window.addEventListener('popstate', function() {
+                // 약간의 지연을 두어 브라우저가 title을 업데이트할 시간을 줌
+                setTimeout(sendPageInfoToParent, 100);
+            });
+        
+            // 타이틀 변경 감지 (MutationObserver 사용)
+            const titleObserver = new MutationObserver(function() {
+                sendPageInfoToParent();
+            });
+            
+            // document.title이 직접 변경되는 경우를 감지하기 위한 트릭
+            // title 요소 관찰
+            if (document.querySelector('title')) {
+                titleObserver.observe(document.querySelector('title'), { 
+                    childList: true, 
+                    characterData: true, 
+                    subtree: true 
+                });
+            }
+            
+            // DOM에 title 요소가 추가되는 경우를 감지
+            const headObserver = new MutationObserver(function(mutations) {
+                mutations.forEach(function(mutation) {
+                    if (mutation.addedNodes) {
+                        mutation.addedNodes.forEach(function(node) {
+                            if (node.nodeName === 'TITLE') {
+                                titleObserver.observe(node, { 
+                                    childList: true, 
+                                    characterData: true, 
+                                    subtree: true 
+                                });
+                                sendPageInfoToParent();
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // head 요소 관찰 시작
+            if (document.head) {
+                headObserver.observe(document.head, { childList: true });
+            }
+        })();
+    </script>
 </body>
 </html>

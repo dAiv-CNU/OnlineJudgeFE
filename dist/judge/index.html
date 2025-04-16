@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="webkit" name="renderer">
+
+    <title>OnlineJudge</title>
+    <link rel="shortcut icon" href="https://daiv-cnu.github.io/dist/res/image/favicon.ico">
+
+    <!-- Style Setting -->
+    <link href="https://daiv-cnu.github.io/dist/res/css/font.css" rel="stylesheet">
+
+    <!-- Page Scripting -->
+    <link href="https://daiv-cnu.github.io/dist/src/main/judge/judge.css" rel="stylesheet">
+    <link href="/static/css/vendor.d7eb5fa53e8000d7b3455700fc1c8303.css" rel="stylesheet">
+    <link href="/static/css/oj.1a28434668fc1763e43fbe78360d97e4.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app-loader">
+        <div class=square></div>
+        <div class=square></div>
+        <div class="square last"></div>
+        <div class="square clear"></div>
+        <div class=square></div>
+        <div class="square last"></div>
+        <div class="square clear"></div>
+        <div class=square></div>
+        <div class="square last"></div>
+    </div>
+    <section id="vue" class="appview">
+        <div id="app"></div>
+    </section>
+    <script type="text/javascript" src="/judge/script/vendor.dll.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/manifest.31351240a507d0376953.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/static/js/vendor.c68548dcd5b5b4a7d84d.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="/judge/script/oj.js" crossorigin="anonymous"></script>
+
+    <section id="footer-container"></section>
+    <script type="module">
+        function insertElement(htmlstr, parent, index = -1) {
+            htmlstr = htmlstr.replace(/{CURRENT_YEAR}/g, `${currentYear}`);
+
+            const element = parseHtml(htmlstr);
+
+            if (index === -1 || parent.childNodes.length <= index) {
+                parent.appendChild(element);
+            } else {
+                parent.insertBefore(element, parent.childNodes[index]);
+            }
+        }
+
+        function parseHtml(htmlstr) {
+            const template = document.createElement('template');
+            template.innerHTML = htmlstr;
+            return template.content;
+        }
+
+        // Create Shadow DOM
+        const container = document.getElementById('footer-container');
+        const shadow = container.attachShadow({mode: 'open'});
+
+        // Edit Shadow DOM InnerHTML
+        // -- Required to copy and paste from bootstrap definition of root selector host style
+        shadow.innerHTML = `
+            <style>
+                :host {
+                    --bs-dark-rgb: 33, 37, 41;
+                    --bs-text-opacity: 1;
+                    --bs-secondary-color: rgba(33, 37, 41, 0.75);
+                }
+
+                .online-judge-page-footer-container {
+                    background: #7d8592 !important;
+                }
+
+                .online-judge-page-footer {
+                    fill: #7d8592 !important;
+                }
+
+                .online-judge-page-footer text {
+                    color: #7d8592 !important;
+                }
+            </style>
+            <link href="https://daiv-cnu.github.io/cdn/bootstrap/5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+            <link href="https://daiv-cnu.github.io/dist/res/css/style.css" rel="stylesheet">
+            <link href="https://daiv-cnu.github.io/dist/res/css/color.css" rel="stylesheet">
+        `;
+        const currentYear = new Date().getFullYear();
+        const templatePath = "footer.html";
+        const result = await fetch("https://daiv-cnu.github.io/dist/res/templates/" + templatePath);
+        const templateText = await result.text();
+        insertElement(templateText, shadow, -1);
+
+        // Remove Back to Top Button from Footer (Use Judge's Back to Top Button instead)
+        shadow.getElementById('btn-back-to-top').remove();
+        shadow.getElementById('footer').classList.add('online-judge-page-footer-container');
+        shadow.getElementById('footer').getElementsByClassName('bi-discord')[0].classList.add('online-judge-page-footer');
+    </script>
+</body>
+</html>

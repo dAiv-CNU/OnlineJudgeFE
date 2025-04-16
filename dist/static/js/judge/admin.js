@@ -12623,7 +12623,7 @@ webpackJsonp([8], {
                                 var n = U()({}, e.formGenerateUser);
                                 M.generateUser(n).then(function (t) {
                                     e.loadingGenerate = !1;
-                                    var n = "/admin/generate_user?file_id=" + t.data.data.file_id;
+                                    var n = "/judge/admin/generate_user?file_id=" + t.data.data.file_id;
                                     S.a.downloadFile(n).then(function () {
                                         e.$alert("All users created successfully, the users sheets have downloaded to your disk.", "Notice")
                                     }), e.getUserList(1)
@@ -14472,7 +14472,7 @@ webpackJsonp([8], {
                 }, handleInlineEdit: function (e) {
                     this.currentRow = e, this.InlineEditDialogVisible = !0
                 }, downloadTestCase: function (e) {
-                    var t = "/admin/test_case?problem_id=" + e;
+                    var t = "/judge/admin/test_case?problem_id=" + e;
                     S.a.downloadFile(t)
                 }, getPublicProblem: function () {
                     M.getProblemList()
@@ -14738,7 +14738,7 @@ webpackJsonp([8], {
                     this.downloadDialogVisible = !0, this.currentId = e
                 }, downloadSubmissions: function () {
                     var e = this.excludeAdmin ? "1" : "0",
-                        t = "/admin/download_submissions?contest_id=" + this.currentId + "&exclude_admin=" + e;
+                        t = "/judge/admin/download_submissions?contest_id=" + this.currentId + "&exclude_admin=" + e;
                     S.a.downloadFile(t)
                 }, goEdit: function (e) {
                     this.$router.push({name: "edit-contest", params: {contestId: e}})
@@ -15314,7 +15314,7 @@ webpackJsonp([8], {
                             if (n) throw i
                         }
                     }
-                    var a = "/admin/export_problem?" + e.join("&");
+                    var a = "/judge/admin/export_problem?" + e.join("&");
                     S.a.downloadFile(a)
                 }, submitUpload: function (e) {
                     this.$refs[e].submit()
@@ -15457,7 +15457,7 @@ webpackJsonp([8], {
         }, "data-v-038d3c15", null).exports;
         o.default.use(f.default);
         var Ke = new f.default({
-                mode: "history", base: "/admin/", scrollBehavior: function () {
+                mode: "history", base: "/judge/admin/", scrollBehavior: function () {
                     return {y: 0}
                 }, routes: [{path: "/login", name: "login", component: Le}, {
                     path: "/",

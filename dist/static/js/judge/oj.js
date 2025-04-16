@@ -23668,7 +23668,7 @@ webpackJsonp([7], {
                 }, [e._v(e._s(e.user.username) + "\n          "), n("Icon", {attrs: {type: "arrow-down-b"}})], 1), e._v(" "), n("Dropdown-menu", {
                     attrs: {slot: "list"},
                     slot: "list"
-                }, [n("Dropdown-item", {attrs: {name: "/judge/user-home"}}, [e._v(e._s(e.$t("m.MyHome")))]), e._v(" "), n("Dropdown-item", {attrs: {name: "/judge/status?myself=1"}}, [e._v(e._s(e.$t("m.MySubmissions")))]), e._v(" "), n("Dropdown-item", {attrs: {name: "/judge/setting/profile"}}, [e._v(e._s(e.$t("m.Settings")))]), e._v(" "), e.isAdminRole ? n("Dropdown-item", {attrs: {name: "/admin"}}, [e._v(e._s(e.$t("m.Management")))]) : e._e(), e._v(" "), n("Dropdown-item", {
+                }, [n("Dropdown-item", {attrs: {name: "/judge/user-home"}}, [e._v(e._s(e.$t("m.MyHome")))]), e._v(" "), n("Dropdown-item", {attrs: {name: "/judge/status?myself=1"}}, [e._v(e._s(e.$t("m.MySubmissions")))]), e._v(" "), n("Dropdown-item", {attrs: {name: "/judge/setting/profile"}}, [e._v(e._s(e.$t("m.Settings")))]), e._v(" "), e.isAdminRole ? n("Dropdown-item", {attrs: {name: "/judge/admin"}}, [e._v(e._s(e.$t("m.Management")))]) : e._e(), e._v(" "), n("Dropdown-item", {
                     attrs: {
                         divided: "",
                         name: "/judge/logout"

@@ -2117,7 +2117,7 @@ webpackJsonp([6], {
       }, changeDomTitle: function (t, e) {
         t.commit;
         var r = t.state;
-        e && e.title ? window.document.title = r.website.website_name_shortcut + " | " + e.title : window.document.title = r.website.website_name_shortcut + " | " + r.route.meta.title
+        e && e.title ? window.document.title = r.website.website_name_shortcut?.replace("oj", "OnlineJudge") + " | " + e.title : window.document.title = r.website.website_name_shortcut?.replace("oj", "OnlineJudge") + " | " + r.route.meta.title
       }
     };
     e.a = new a.default.Store({
